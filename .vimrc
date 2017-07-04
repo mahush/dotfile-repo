@@ -8,5 +8,9 @@ au BufEnter,BufRead *.conf setf dosini
 
 set shiftwidth=4 
 
+syntax enable
+set background=light
+colorscheme solarized
+
 " open diffs in vertical split view
 set diffopt+=vertical
