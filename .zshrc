@@ -95,4 +95,6 @@ function zle-keymap-select {
  VIMODE="${${KEYMAP/vicmd/n}/(main|viins)/i}"
  zle reset-prompt
 }
+zle -N zle-line-init
 zle -N zle-keymap-select
+
