@@ -50,11 +50,12 @@
 # Do not change this! Do not make it '\u2b80'; that is the old, wrong code point.
   SEGMENT_SEPARATOR=$'\ue0b0'
 
-  BACKGROUND_COLOR=255
-  COLOR_CYAN=123 
-  COLOR_BLACK=240
-  COLOR_WHITE=255
-  COLOR_RED=160
+  BACKGROUND_COLOR="253;246;227"
+  COLOR_CYAN="42;161;152"
+  COLOR_BLACK="88;110;117"
+  COLOR_WHITE="255;255;255"
+  COLOR_YELLOW="181;137;0"
+  COLOR_RED="220;50;47"
 }
 
 CURRENT_BG="$BACKGROUND_COLOR"
@@ -62,8 +63,10 @@ CURRENT_FG="None"
 local seperator_pending=0
 
 setColors() { # BG, FG 
-
-   echo -n "%{%K{$1}%}%{%F{$2}%}"
+   local background=$1
+   local foreground=$2
+   echo -n "%{\x1b[38;2;${foreground}m%}" #foreground
+   echo -n "%{\x1b[48;2;${background}m%}" #background
 
    CURRENT_BG=$1
    CURRENT_FG=$2
@@ -96,7 +99,7 @@ prompt_end() {
   prompt_text "$BACKGROUND_COLOR" "$CURRENT_FG" ""
    
   # reset colors
-  echo -n "%{%k%}%{%f%}"
+  echo -n "%{\x1b[0m%}"
   CURRENT_BG="$BACKGROUND_COLOR"
 }
 
@@ -104,7 +107,7 @@ prompt_end() {
 # Each component will draw itself, and hide itself if no information needs to be shown
 
 # Context: user@hostname (who am I and where am I)
-prompt_context() {
+prompt_context() { # BG, FG
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
 
     prompt_text "$1" "$2" " %{%B%}$USER%{%b%}"
@@ -113,13 +116,13 @@ prompt_context() {
 }
 
 # Status
-prompt_status() {
+prompt_status() { # BG, FG
 
-  local background_color="$COLOR_BLACK"
-  local foreground_color="$COLOR_WHITE"
+  local background_color="$1"
+  local foreground_color="$2"
   local text='*'
 
-  [[ $RETVAL -ne 0 ]] && background_color=$COLOR_RED
+  [[ $RETVAL -ne 0 ]] && background_color=$COLOR_RED && foreground_color=$COLOR_WHITE
   [[ $UID -eq 0 ]] && text="⚡"
   [[ $(jobs -l | wc -l) -gt 0 ]] && text="⚙"
 
@@ -127,11 +130,8 @@ prompt_status() {
 }
 
 # Dir: current working directory
-prompt_dir() {
-#wd "show"
-  local path="%~"
-# [[ `wd show` =~ '.*to current directory\: (.*)' ]] && path+=$match[1]
-  prompt_text "$1" "$2" " $path "
+prompt_dir() { # BG, FG
+  prompt_text "$1" "$2" " %~ "
 }
 
 # Git: branch/detached head, dirty status
@@ -182,15 +182,14 @@ prompt_git() {
 build_prompt_left() {
   RETVAL=$?
 
-  prompt_context "$COLOR_CYAN" "$COLOR_BLACK" 
+  prompt_context "$COLOR_BLACK" "$COLOR_WHITE" 
   prompt_seperator 
-  prompt_status "$COLOR_BLACK" "$COLOR_WHITE"
+  prompt_status "$COLOR_CYAN" "$COLOR_BLACK"
   prompt_seperator 
   prompt_end
 }
 
 build_prompt_right() {
-
   prompt_seperator 
   prompt_git
   prompt_seperator 
@@ -200,3 +199,5 @@ build_prompt_right() {
 
 PROMPT='$(build_prompt_left) '
 RPROMPT='$(build_prompt_right)'
+
+
