@@ -7,3 +7,6 @@ set number
 au BufEnter,BufRead *.conf setf dosini
 
 set shiftwidth=4 
+
+" open diffs in vertical split view
+set diffopt+=vertical
