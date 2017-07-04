@@ -98,3 +98,6 @@ function zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+
+# create aliases
+alias rvim='sudo -E vim' 
