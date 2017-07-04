@@ -12,5 +12,7 @@ syntax enable
 set background=light
 colorscheme solarized
 
+:set hlsearch
+
 " open diffs in vertical split view
 set diffopt+=vertical
