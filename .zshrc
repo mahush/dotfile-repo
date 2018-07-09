@@ -90,11 +90,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# make special highlightings
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
-ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=green,bold'
-
 # set VIMODE according to the current mode (default “[i]”)
 VIMODE='i'
 function zle-keymap-select {
@@ -104,6 +99,8 @@ function zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+# make special highlightings
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # create aliases
 alias rvim='sudo -E vim' 
