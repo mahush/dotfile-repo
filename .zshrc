@@ -47,6 +47,12 @@ ZSH_THEME="mahush"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Show elapsed time for command if longer than 10 seconds
+REPORTTIME=30
+
+# Show time output in hh:mm:ss.ttt format
+TIMEFMT=$'\nreal   %*E\nuser   %*U\nsystem %*S\ncpu    %P'
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
