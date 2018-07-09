@@ -92,7 +92,7 @@ source $ZSH/oh-my-zsh.sh
 
 # set VIMODE according to the current mode (default “[i]”)
 VIMODE='i'
-function zle-keymap-select {
+function zle-line-init zle-keymap-select {
  VIMODE="${${KEYMAP/vicmd/n}/(main|viins)/i}"
  zle reset-prompt
 }
