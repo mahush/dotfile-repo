@@ -9,8 +9,6 @@ au BufEnter,BufRead *.conf setf dosini
 set shiftwidth=4 
 
 syntax enable
-set background=light
-colorscheme solarized
 
 :set hlsearch
 
