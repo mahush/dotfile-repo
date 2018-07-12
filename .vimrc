@@ -14,3 +14,10 @@ syntax enable
 
 " open diffs in vertical split view
 set diffopt+=vertical
+
+" enable relative line nubmers
+set relativenumber
+
+" show invisible chars
+set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<,space:·
+set list
