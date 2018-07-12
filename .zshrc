@@ -57,7 +57,7 @@ TIMEFMT=$'\nreal   %*E\nuser   %*U\nsystem %*S\ncpu    %P'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode sudo wd zsh-syntax-highlighting)
+plugins=(git vi-mode sudo wd zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,6 +101,10 @@ zle -N zle-keymap-select
 
 # make special highlightings
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=gray,bold
+
+# configure zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=14'
 
 # create aliases
 alias rvim='sudo -E vim' 
